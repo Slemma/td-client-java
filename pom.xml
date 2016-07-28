@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.treasuredata</groupId>
+  <groupId>com.slemma</groupId>
   <artifactId>td-client</artifactId>
   <name>Treasure Data Client for Java</name>
   <description>Treasure Data Client for Java.</description>
@@ -24,10 +24,10 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git://github.com/treasure-data/td-client-java.git</connection>
-    <developerConnection>scm:git:git@github.com:treasure-data/td-client-java.git</developerConnection>
-    <url>https://github.com/treasure-data/td-client-java.git</url>
-    <tag>HEAD</tag>
+    <connection>scm:git:git://github.com/Slemma/td-client-java.git</connection>
+    <developerConnection>scm:git:git@github.com:Slemma/td-client-java.git</developerConnection>
+    <url>https://github.com/Slemma/td-client-java.git</url>
+    <tag>0.7.24</tag>
   </scm>
 
   <issueManagement>
@@ -60,7 +60,7 @@
     <maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
     <maven-eclipse-plugin.version>2.5.1</maven-eclipse-plugin.version>
     <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
-    <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+    <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>msgpack
     <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
     <wagon-webdav-jackrabbit.version>1.0-beta-7</wagon-webdav-jackrabbit.version>
     <maven-scm-plugin.version>1.6</maven-scm-plugin.version>

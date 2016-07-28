@@ -164,6 +164,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Authentication failed", message, code));
                 LOG.severe(errMessage);
@@ -804,6 +805,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Rename table failed", message, code));
                 LOG.severe(errMessage);
@@ -886,6 +888,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Swap table failed", message, code));
                 LOG.severe(errMessage);
@@ -967,6 +970,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Delete table failed", message, code));
                 LOG.severe(errMessage);
@@ -1050,6 +1054,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Delete partial table failed", message, code));
                 LOG.severe(errMessage);
@@ -1163,6 +1168,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Set table schema failed", message, code));
                 LOG.severe(errMessage);
@@ -1311,6 +1317,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Import data failed", message, code));
                 LOG.severe(errMessage);
@@ -1421,6 +1428,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Export failed", message, code));
                 LOG.severe(errMessage);
@@ -1463,6 +1471,8 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
                     LOG.warning("Retry succeeded.");
                 }
                 break;
+            } catch (TrialException e) {
+                throw e;
             } catch (ClientException e) {
                 // TODO FIXME
                 if (count >= getRetryCount()) {
@@ -1515,6 +1525,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Submit job failed", message, code));
                 LOG.severe(errMessage);
@@ -1554,6 +1565,12 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
         job.setJobID(jobID);
 
         return new SubmitJobResult(job);
+    }
+
+    private void checkTrial(int code, String message) throws ClientException
+    {
+        if (code == 422 && message.contains("Your Presto trial has expired!"))
+            throw new TrialException("Your Presto trial has expired! Contact support to add Presto to your plan.");
     }
 
     @Override
@@ -1616,6 +1633,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "List jobs failed", message, code));
                 LOG.severe(errMessage);
@@ -1714,6 +1732,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Kill job failed", message, code));
                 LOG.severe(errMessage);
@@ -1795,6 +1814,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Show jobs failed", message, code));
                 LOG.severe(errMessage);
@@ -1892,6 +1912,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Show job status failed", message, code));
                 LOG.severe(errMessage);
@@ -1985,6 +2006,7 @@ public class DefaultClientAdaptorImpl extends AbstractClientAdaptor implements
             message = conn.getResponseMessage();
             if (code != HttpURLConnection.HTTP_OK) {
                 String errMessage = conn.getErrorMessage();
+                checkTrial(code, errMessage);
                 LOG.severe(HttpClientException.toMessage(
                         "Get job result failed", message, code));
                 LOG.severe(errMessage);

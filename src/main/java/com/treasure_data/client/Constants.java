@@ -58,7 +58,7 @@ public interface Constants {
     String TD_CLIENT_POSTMETHOD_READ_TIMEOUT_DEFAULTVALUE = "" + 600 * 1000; // millis
 
     String TD_CLIENT_RETRY_COUNT = "td.client.retry.count";
-    String TD_CLIENT_RETRY_COUNT_DEFAULTVALUE = "8";
+    String TD_CLIENT_RETRY_COUNT_DEFAULTVALUE = "3";
 
     String TD_CLIENT_RETRY_WAIT_TIME = "td.client.retry.wait.time";
     String TD_CLIENT_RETRY_WAIT_TIME_DEFAULTVALUE = "1000";
